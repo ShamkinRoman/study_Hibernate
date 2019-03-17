@@ -40,4 +40,14 @@ public class Task {
     public void setDone(Boolean done) {
         this.done = done;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", desc='" + desc + '\'' +
+                ", created=" + created +
+                ", done=" + done +
+                '}';
+    }
 }

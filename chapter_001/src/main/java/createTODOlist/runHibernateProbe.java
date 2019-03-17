@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 public class runHibernateProbe {
@@ -12,12 +13,14 @@ public class runHibernateProbe {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         session.beginTransaction();
-        Task task = new Task();
-        task.setCreated(new Timestamp(System.currentTimeMillis()));
-        task.setDesc("Изменили описание");
-        task.setDone(true);
-        task.setId(1);
-        session.saveOrUpdate(task);
+//        Task task = new Task();
+//        task.setCreated(new Timestamp(System.currentTimeMillis()));
+//        task.setDesc("Изменили описание");
+//        task.setDone(true);
+//        task.setId(1);
+//        session.saveOrUpdate(task);
+        session.createQuery("from Task").list().forEach(System.out::println);
+
         session.getTransaction().commit();
         session.close();
         factory.close();

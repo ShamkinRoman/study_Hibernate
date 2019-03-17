@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Hello, Hibernate!</title>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script>
+        function addUserToJSON() {
+            var descriptoin = $('#input_description').val();
+            alert(descriptoin);
+            var resp = {"desc": descriptoin};
+            var xhr = new XMLHttpRequest();
+            var respToJson = JSON.stringify(resp);
+            xhr.open("POST", "http://localhost:8080/chapter_001_war_exploded/base", false);
+            xhr.send(respToJson);
+            $('#input_description').val("");
+        }
+
+        function getResult() {
+            var xhr = new XMLHttpRequest();
+            var check = document.getElementById("check_show_all").checked;
+            var all_task = "no";
+            if (check) {
+                all_task = "all";
+            }
+            xhr.open("GET", "http://localhost:8080/chapter_001_war_exploded/base?show=" +all_task, false);
+            xhr.send();
+            var response = xhr.responseText;
+            var tasks = JSON.parse(response);
+            alert(tasks.length);
+            alert(document.getElementById("table").rows.length);
+            for(var i=document.getElementById("table").rows.length; i>1; i--) {
+                document.getElementById("table").deleteRow(i);
+            }
+            fill_result(tasks);
+        }
+
+        function fill_result(tasks) {
+            var tbodyAdd = document.getElementById("tbody_result");
+            var trAddchild;
+            var addTR;
+            var addTD;
+            for (var i = 0; i < tasks.length; i++) {
+                addTR = document.createElement("tr");
+                addTR.setAttribute("id", "tr" + i);
+                tbodyAdd.appendChild(addTR);
+                trAddchild = document.getElementById("tr" + i);
+
+                addTD = document.createElement("td");
+                addTD.setAttribute("id", "id" + i);
+                trAddchild.appendChild(addTD);
+                document.getElementById("id" + i).innerText = tasks[i].id;
+
+                addTD = document.createElement("td");
+                addTD.setAttribute("id", "id_desc" + i);
+                trAddchild.appendChild(addTD);
+                document.getElementById("id_desc" + i).innerText = tasks[i].desc;
+
+                addTD = document.createElement("td");
+                addTD.setAttribute("id", "id_time" + i);
+                trAddchild.appendChild(addTD);
+                document.getElementById("id_time" + i).innerText = tasks[i].created;
+
+                addTD = document.createElement("td");
+                addTD.setAttribute("id", "id_done" + i);
+                trAddchild.appendChild(addTD);
+                document.getElementById("id_done" + i).innerText = tasks[i].done;
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <h2>Hibernate solution.</h2>
+    <p>На этой таблице будем применять Hibernate.</p>
+    <table class="table table-borderless">
+        <thead>
+        <tr>
+            <th>Добавить задачу</th>
+            <th>Опции</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Описание</td>
+            <td>Показать все задачи <input type="checkbox" id="check_show_all" name="check_show_all"></td>
+        </tr>
+        <tr>
+            <td><textarea id="input_description"></textarea></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="Отправить данные" onclick="addUserToJSON()"></td>
+            <td><input type="button" value="Запрос данных" onclick="getResult()"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Все что имеем покажем ниже.</h2>
+    <table class="table" id="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Done</th>
+        </tr>
+        </thead>
+        <tbody id="tbody_result">
+        <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@example.com</td>
+            <td>ddddd</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
