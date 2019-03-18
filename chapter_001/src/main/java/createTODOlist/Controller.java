@@ -16,6 +16,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Сервлет ддя приема(передачи) данных из таблицы postgresql в формате JSON используюя HIBERNATE.
+ */
 public class Controller extends HttpServlet {
     private List<Task> task;
     private List<Task> temp;
@@ -34,9 +37,15 @@ public class Controller extends HttpServlet {
         factory.close();
     }
 
+    /**
+     * Передаем записи их таблицы в зависимости от параметра show. All все, иначе только у которых поле done = TRUE.
+     * @param req запрос.
+     * @param resp ответ.
+     * @throws ServletException какой-то эксепшэн :).
+     * @throws IOException что - то странное.
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         session.beginTransaction();
         temp = session.createQuery("from Task").list();
         if (!req.getParameter("show").equals("all")) {
@@ -49,9 +58,16 @@ public class Controller extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         writer.append(json);
         writer.flush();
-        session.getTransaction().commit();
+        session.getTransaction().commit(); // нужна ли она здесь ???
     }
 
+    /**
+     * Метод для приема данных в формате JSON, преобразовании его к типу QuerryBD и записи в БД.
+     * @param req запрос.
+     * @param resp ответ.
+     * @throws ServletException Ошибка1.
+     * @throws IOException Ошибка2.
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json");
@@ -64,12 +80,12 @@ public class Controller extends HttpServlet {
             while ((s = reader.readLine()) != null) {
                 sb.append(s);
             }
-            QuerryDB desc = gson.fromJson(sb.toString(), QuerryDB.class);
+            QuerryDB desc = gson.fromJson(sb.toString(), QuerryDB.class); //Подставной класс для удобства.
             session.beginTransaction();
             Task task = new Task();
             task.setCreated(new Timestamp(System.currentTimeMillis()));
             task.setDesc(desc.getDesc());
-            task.setDone(false);
+            task.setDone(desc.getDone());
             session.saveOrUpdate(task);
             session.getTransaction().commit();
             reader.close();

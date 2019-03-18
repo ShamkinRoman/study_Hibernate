@@ -23,11 +23,11 @@
     <script>
         function addUserToJSON() {
             var descriptoin = $('#input_description').val();
-            alert(descriptoin);
-            var resp = {"desc": descriptoin};
+            var done = $('#done').val();
+            var resp = {"desc": descriptoin, "done": done};
             var xhr = new XMLHttpRequest();
             var respToJson = JSON.stringify(resp);
-            xhr.open("POST", "http://localhost:8080/chapter_001_war_exploded/base", false);
+            xhr.open("POST", "./base", false);
             xhr.send(respToJson);
             $('#input_description').val("");
         }
@@ -39,14 +39,15 @@
             if (check) {
                 all_task = "all";
             }
-            xhr.open("GET", "http://localhost:8080/chapter_001_war_exploded/base?show=" +all_task, false);
+            xhr.open("GET", "./base?show=" + all_task, false);
             xhr.send();
             var response = xhr.responseText;
             var tasks = JSON.parse(response);
-            alert(tasks.length);
             alert(document.getElementById("table").rows.length);
-            for(var i=document.getElementById("table").rows.length; i>1; i--) {
-                document.getElementById("table").deleteRow(i);
+            var element_to_delete = document.getElementById("tbody_result");
+            //delete table.
+            while (element_to_delete.lastChild) {
+                element_to_delete.removeChild(element_to_delete.lastChild);
             }
             fill_result(tasks);
         }
@@ -103,12 +104,19 @@
             <td>Показать все задачи <input type="checkbox" id="check_show_all" name="check_show_all"></td>
         </tr>
         <tr>
-            <td><textarea id="input_description"></textarea></td>
-            <td></td>
+            <td>
+                <textarea id="input_description"></textarea>
+                <br>
+                <select name="done_choose" id="done">
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                </select>
+            </td>
+            <td><input type="button" value="Запрос данных" onclick="getResult()"></td>
         </tr>
         <tr>
             <td><input type="button" value="Отправить данные" onclick="addUserToJSON()"></td>
-            <td><input type="button" value="Запрос данных" onclick="getResult()"></td>
+            <td></td>
         </tr>
         </tbody>
     </table>
@@ -126,16 +134,8 @@
         </tr>
         </thead>
         <tbody id="tbody_result">
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-            <td>ddddd</td>
-        </tr>
-
         </tbody>
     </table>
 </div>
-
 </body>
 </html>
