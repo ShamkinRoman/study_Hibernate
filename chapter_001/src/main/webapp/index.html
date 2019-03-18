@@ -57,6 +57,9 @@
             var trAddchild;
             var addTR;
             var addTD;
+            var addRB;
+            var addLabel;
+            var td_add_child;
             for (var i = 0; i < tasks.length; i++) {
                 addTR = document.createElement("tr");
                 addTR.setAttribute("id", "tr" + i);
@@ -81,7 +84,45 @@
                 addTD = document.createElement("td");
                 addTD.setAttribute("id", "id_done" + i);
                 trAddchild.appendChild(addTD);
-                document.getElementById("id_done" + i).innerText = tasks[i].done;
+                // document.getElementById("id_done" + i).innerText = tasks[i].done;
+
+                td_add_child = document.getElementById("id_done" + i);
+
+                addRB = document.createElement("input");
+                addRB.setAttribute("type", "radio");
+                addRB.setAttribute("name", "radio"+i);
+                addRB.setAttribute("id", "radioTrue"+i);
+                td_add_child.appendChild(addRB);
+
+                addLabel=document.createElement("label");
+                addRB.setAttribute("id", "LabelTrue"+i);
+                document.getElementById("LabelTrue"+i).innerText = "true";
+                td_add_child.appendChild(addLabel);
+
+                addRB = document.createElement("input");
+                addRB.setAttribute("type", "radio");
+                addRB.setAttribute("name", "radio"+i);
+                addRB.setAttribute("id", "radioFalse"+i);
+                td_add_child.appendChild(addRB);
+
+                addLabel=document.createElement("label");
+                addRB.setAttribute("id", "LabelFalse"+i);
+                document.getElementById("LabelTrue"+i).innerText = "false";
+                td_add_child.appendChild(addLabel);
+
+                //
+                // if (tasks[i].done = true) {
+                //     document.getElementById("radioTrue"+i).setAttribute("","checked");
+                // } else {
+                //     document.getElementById("radioFalse"+i).setAttribute("","checked");
+                // }
+            }
+        }
+        function printRadio() {
+            var elements = document.getElementsByName("radSize");
+            var lett;
+            for (lett =0; lett<elements.length; lett++){
+                alert(elements[lett].checked);
             }
         }
     </script>
@@ -134,8 +175,37 @@
         </tr>
         </thead>
         <tbody id="tbody_result">
+        <tr>
+            <td>Id</td>
+            <td>Description</td>
+            <td>Created</td>
+            <td>
+                <input type="radio" name ="wwe"> <label>true</label>
+                <input type="radio" name="wwe"> <label>false</label>
+                </td>
+
         </tbody>
     </table>
 </div>
+
+<label>Radio buttons</label>
+<input type = "radio"
+       name = "radSize"
+       id = "sizeSmall"
+       value = "small11"
+       checked = "checked" />
+<label for = "sizeSmall">small</label>
+<input type = "radio"
+       name = "radSize"
+       id = "sizeMed"
+       value = "medium" />
+<label for = "sizeMed">medium</label>
+<input type = "radio"
+       name = "radSize"
+       id = "sizeLarge"
+       value = "large" />
+<label for = "sizeLarge">large</label>
+<br>
+<INPUT type="button" onclick="printRadio()" value="Press">
 </body>
 </html>
