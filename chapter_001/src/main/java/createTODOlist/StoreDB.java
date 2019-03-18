@@ -1,5 +1,6 @@
 package createTODOlist;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,7 +20,7 @@ public class StoreDB implements AutoCloseable {
         init();
     }
 
-    protected void init(){
+    protected void init() {
         this.factory = new Configuration().configure().buildSessionFactory();
         this.session = factory.openSession();
     }
@@ -34,7 +35,7 @@ public class StoreDB implements AutoCloseable {
         this.factory.close();
     }
 
-    protected List<Task> getListTask(String string){
+    protected List<Task> getListTask(String string) {
         session.beginTransaction();
         temp = session.createQuery("from Task").list();
         if (!string.equals("all")) {
@@ -45,13 +46,32 @@ public class StoreDB implements AutoCloseable {
         return tasks;
     }
 
+    /**
+     * Добавляем запись в БД. Если есть id то вызваем обновление записи.
+     * @param querryDB Запись для внисения в БД.
+     */
     protected void addTask(QuerryDB querryDB) {
+        System.out.println("Call addTask Method" + querryDB.toString());
+        if (querryDB.getId() != null) {
+            updateTask(querryDB);
+        } else {
+            session.beginTransaction();
+            Task task = new Task();
+            task.setCreated(new Timestamp(System.currentTimeMillis()));
+            task.setDesc(querryDB.getDesc());
+            task.setDone(querryDB.getDone());
+            session.saveOrUpdate(task);
+            session.getTransaction().commit();
+        }
+    }
+
+    protected void updateTask(QuerryDB querryDB) {
+        System.out.println("Call update method " + querryDB.toString());
         session.beginTransaction();
         Task task = new Task();
-        task.setCreated(new Timestamp(System.currentTimeMillis()));
-        task.setDesc(querryDB.getDesc());
+        task.setId(querryDB.getId());
         task.setDone(querryDB.getDone());
-        session.saveOrUpdate(task);
+        session.update(task);
         session.getTransaction().commit();
     }
 

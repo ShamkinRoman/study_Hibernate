@@ -43,13 +43,23 @@
             xhr.send();
             var response = xhr.responseText;
             var tasks = JSON.parse(response);
-            alert(document.getElementById("table").rows.length);
             var element_to_delete = document.getElementById("tbody_result");
             //delete table.
             while (element_to_delete.lastChild) {
                 element_to_delete.removeChild(element_to_delete.lastChild);
             }
             fill_result(tasks);
+        }
+
+        function updateDone(i) {
+            var change = false;
+            if(document.getElementById("radioTrue"+i).checked)
+                change = true;
+            var resp = {"id":document.getElementById("id"+i).textContent, "desc": document.getElementById("id_desc"+i).textContent, "done": change};
+            var xhr = new XMLHttpRequest();
+            var respToJson = JSON.stringify(resp);
+            xhr.open("POST", "./base", false);
+            xhr.send(respToJson);
         }
 
         function fill_result(tasks) {
@@ -60,6 +70,7 @@
             var addRB;
             var addLabel;
             var td_add_child;
+            var addButton;
             for (var i = 0; i < tasks.length; i++) {
                 addTR = document.createElement("tr");
                 addTR.setAttribute("id", "tr" + i);
@@ -84,7 +95,6 @@
                 addTD = document.createElement("td");
                 addTD.setAttribute("id", "id_done" + i);
                 trAddchild.appendChild(addTD);
-                // document.getElementById("id_done" + i).innerText = tasks[i].done;
 
                 td_add_child = document.getElementById("id_done" + i);
 
@@ -95,8 +105,7 @@
                 td_add_child.appendChild(addRB);
 
                 addLabel=document.createElement("label");
-                addRB.setAttribute("id", "LabelTrue"+i);
-                document.getElementById("LabelTrue"+i).innerText = "true";
+                addLabel.setAttribute("id", "LabelTrue"+i);
                 td_add_child.appendChild(addLabel);
 
                 addRB = document.createElement("input");
@@ -106,24 +115,28 @@
                 td_add_child.appendChild(addRB);
 
                 addLabel=document.createElement("label");
-                addRB.setAttribute("id", "LabelFalse"+i);
-                document.getElementById("LabelTrue"+i).innerText = "false";
+                addLabel.setAttribute("id", "LabelFalse"+i);
                 td_add_child.appendChild(addLabel);
+                document.getElementById("LabelTrue"+i).innerText = "true";
+                document.getElementById("LabelFalse"+i).innerText = "false";
 
-                //
-                // if (tasks[i].done = true) {
-                //     document.getElementById("radioTrue"+i).setAttribute("","checked");
-                // } else {
-                //     document.getElementById("radioFalse"+i).setAttribute("","checked");
-                // }
+                addButton =document.createElement("input");
+                addButton.setAttribute("type","button");
+                addButton.setAttribute("id","button"+i);
+                addButton.setAttribute("value","update");
+                addButton.setAttribute("onclick","updateDone("+i+")");
+                td_add_child.appendChild(addButton);
+
+                if (tasks[i].done == true) {
+                    document.getElementById("radioTrue"+i).setAttribute("checked","checked");
+                } else {
+                    document.getElementById("radioFalse"+i).setAttribute("checked","checked");
+                }
             }
         }
         function printRadio() {
-            var elements = document.getElementsByName("radSize");
-            var lett;
-            for (lett =0; lett<elements.length; lett++){
-                alert(elements[lett].checked);
-            }
+            var element = document.getElementById("for_print");
+            alert (element.textContent);
         }
     </script>
 
@@ -178,10 +191,10 @@
         <tr>
             <td>Id</td>
             <td>Description</td>
-            <td>Created</td>
+            <td id="for_print">Created</td>
             <td>
-                <input type="radio" name ="wwe"> <label>true</label>
-                <input type="radio" name="wwe"> <label>false</label>
+                <input type="radio" name ="wwe" onchange="printRadio()"> <label>true</label>
+                <input type="radio" name="wwe" onchange="printRadio()"> <label>false</label>
                 </td>
 
         </tbody>
@@ -207,5 +220,9 @@
 <label for = "sizeLarge">large</label>
 <br>
 <INPUT type="button" onclick="printRadio()" value="Press">
+<br>
+<input type="checkbox" name="rrr" value="wwer">
+<input type="checkbox" name="rrr" value="ddd">
+
 </body>
 </html>

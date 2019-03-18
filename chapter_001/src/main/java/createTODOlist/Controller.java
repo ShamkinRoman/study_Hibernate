@@ -56,6 +56,7 @@ public class Controller extends HttpServlet {
                 sb.append(s);
             }
             QuerryDB taskToAdd = gson.fromJson(sb.toString(), QuerryDB.class); //Подставной класс для удобства.
+            System.out.println("incoming task " + taskToAdd.toString());
             storeDB.addTask(taskToAdd);
             reader.close();
         } catch (IOException e) {
