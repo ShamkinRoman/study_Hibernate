@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StoreDB implements AutoCloseable {
-    private static StoreDB instance = new StoreDB();
-    private Session session;
+    //        private static StoreDB instance = new StoreDB();
     private SessionFactory factory;
     private List<Task> tasks;
     private List<Task> temp;
@@ -22,20 +21,19 @@ public class StoreDB implements AutoCloseable {
 
     protected void init() {
         this.factory = new Configuration().configure().buildSessionFactory();
-        this.session = factory.openSession();
     }
 
-    public StoreDB getInstance() {
-        return instance;
-    }
+//    public StoreDB getInstance() {
+//        return instance;
+//    }
 
     @Override
     public void close() throws Exception {
-        this.session.close();
         this.factory.close();
     }
 
     protected List<Task> getListTask(String string) {
+        Session session = factory.openSession();
         session.beginTransaction();
         temp = session.createQuery("from Task").list();
         if (!string.equals("all")) {
@@ -43,36 +41,41 @@ public class StoreDB implements AutoCloseable {
         } else
             tasks = temp;
         session.getTransaction().commit();
+        session.close();
         return tasks;
     }
 
     /**
      * Добавляем запись в БД. Если есть id то вызваем обновление записи.
+     *
      * @param querryDB Запись для внисения в БД.
      */
     protected void addTask(QuerryDB querryDB) {
-        System.out.println("Call addTask Method" + querryDB.toString());
+        Task task = new Task();
         if (querryDB.getId() != null) {
             updateTask(querryDB);
         } else {
+            Session session = factory.openSession();
             session.beginTransaction();
-            Task task = new Task();
             task.setCreated(new Timestamp(System.currentTimeMillis()));
             task.setDesc(querryDB.getDesc());
             task.setDone(querryDB.getDone());
             session.saveOrUpdate(task);
             session.getTransaction().commit();
+            session.close();
         }
     }
 
     protected void updateTask(QuerryDB querryDB) {
-        System.out.println("Call update method " + querryDB.toString());
+        Session session = factory.openSession();
         session.beginTransaction();
         Task task = new Task();
         task.setId(querryDB.getId());
         task.setDone(querryDB.getDone());
+        task.setDesc(querryDB.getDesc());
+        task.setCreated(new Timestamp(System.currentTimeMillis()));
         session.update(task);
         session.getTransaction().commit();
+        session.close();
     }
-
 }

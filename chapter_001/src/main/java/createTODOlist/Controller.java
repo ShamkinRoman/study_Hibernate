@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  * Сервлет ддя приема(передачи) данных из таблицы postgresql в формате JSON используюя HIBERNATE.
  */
 public class Controller extends HttpServlet {
-    private StoreDB storeDB = new StoreDB().getInstance();
+    private StoreDB storeDB = new StoreDB();
 
     /**
      * Передаем записи их таблицы в зависимости от параметра show. All все, иначе только у которых поле done = TRUE.

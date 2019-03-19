@@ -60,6 +60,7 @@
             var respToJson = JSON.stringify(resp);
             xhr.open("POST", "./base", false);
             xhr.send(respToJson);
+            getResult();
         }
 
         function fill_result(tasks) {
@@ -188,41 +189,9 @@
         </tr>
         </thead>
         <tbody id="tbody_result">
-        <tr>
-            <td>Id</td>
-            <td>Description</td>
-            <td id="for_print">Created</td>
-            <td>
-                <input type="radio" name ="wwe" onchange="printRadio()"> <label>true</label>
-                <input type="radio" name="wwe" onchange="printRadio()"> <label>false</label>
-                </td>
-
+        <tr> </tr>
         </tbody>
     </table>
 </div>
-
-<label>Radio buttons</label>
-<input type = "radio"
-       name = "radSize"
-       id = "sizeSmall"
-       value = "small11"
-       checked = "checked" />
-<label for = "sizeSmall">small</label>
-<input type = "radio"
-       name = "radSize"
-       id = "sizeMed"
-       value = "medium" />
-<label for = "sizeMed">medium</label>
-<input type = "radio"
-       name = "radSize"
-       id = "sizeLarge"
-       value = "large" />
-<label for = "sizeLarge">large</label>
-<br>
-<INPUT type="button" onclick="printRadio()" value="Press">
-<br>
-<input type="checkbox" name="rrr" value="wwer">
-<input type="checkbox" name="rrr" value="ddd">
-
 </body>
 </html>
