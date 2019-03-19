@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StoreDB implements AutoCloseable {
-    //        private static StoreDB instance = new StoreDB();
     private SessionFactory factory;
     private List<Task> tasks;
     private List<Task> temp;
@@ -22,10 +21,6 @@ public class StoreDB implements AutoCloseable {
     protected void init() {
         this.factory = new Configuration().configure().buildSessionFactory();
     }
-
-//    public StoreDB getInstance() {
-//        return instance;
-//    }
 
     @Override
     public void close() throws Exception {
@@ -46,36 +41,23 @@ public class StoreDB implements AutoCloseable {
     }
 
     /**
-     * Добавляем запись в БД. Если есть id то вызваем обновление записи.
+     * Добавляем или обновляем запись в БД.
      *
      * @param querryDB Запись для внисения в БД.
      */
     protected void addTask(QuerryDB querryDB) {
         Task task = new Task();
-        if (querryDB.getId() != null) {
-            updateTask(querryDB);
-        } else {
-            Session session = factory.openSession();
-            session.beginTransaction();
-            task.setCreated(new Timestamp(System.currentTimeMillis()));
-            task.setDesc(querryDB.getDesc());
-            task.setDone(querryDB.getDone());
-            session.saveOrUpdate(task);
-            session.getTransaction().commit();
-            session.close();
-        }
-    }
-
-    protected void updateTask(QuerryDB querryDB) {
         Session session = factory.openSession();
+        if (querryDB.getId() != null) {
+            task.setId(querryDB.getId());
+        }
         session.beginTransaction();
-        Task task = new Task();
-        task.setId(querryDB.getId());
-        task.setDone(querryDB.getDone());
-        task.setDesc(querryDB.getDesc());
         task.setCreated(new Timestamp(System.currentTimeMillis()));
-        session.update(task);
+        task.setDesc(querryDB.getDesc());
+        task.setDone(querryDB.getDone());
+        session.saveOrUpdate(task);
         session.getTransaction().commit();
         session.close();
+
     }
 }
