@@ -1,26 +1,30 @@
 package createTODOlist;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+
 
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Класс для выполнения запросов записи и получения списка объектов в БД.
+ */
 public class StoreDB implements AutoCloseable {
-    private SessionFactory factory;
+    private final SessionFactory factory = SessionFactorySingleton.getSessionFactory();
+    private static StoreDB instance = new StoreDB();
+
+    private StoreDB() {
+    }
+
+    public static StoreDB getInstance() {
+        return instance;
+    }
+
     private List<Task> tasks;
     private List<Task> temp;
 
-    public StoreDB() {
-        init();
-    }
-
-    protected void init() {
-        this.factory = new Configuration().configure().buildSessionFactory();
-    }
 
     @Override
     public void close() throws Exception {

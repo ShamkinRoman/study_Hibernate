@@ -4,10 +4,21 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+/**
+ * Класс для преобразования из (в) строки формата JSON в String, с последующей записью(выдачи) данных БД.
+ */
 public class ServiceDB implements AutoCloseable {
-    private StoreDB storeDB = new StoreDB();
+    private final StoreDB storeDB = StoreDB.getInstance();
+    private static ServiceDB INSTANCE = new ServiceDB();
 
-    public QuerryDB makeQuerryDB(String string) {
+    private ServiceDB() {
+    }
+
+    public static ServiceDB getINSTANCE() {
+        return INSTANCE;
+    }
+
+    protected QuerryDB makeQuerryDB(String string) {
         Gson gson = new Gson();
         QuerryDB taskToAdd = gson.fromJson(string, QuerryDB.class); //Подставной класс для удобства.
         System.out.println("incoming task " + taskToAdd.toString()); // для проверки.

@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Сервлет ддя приема(передачи) данных из таблицы postgresql в формате JSON используюя HIBERNATE.
+ * Сервлет ддя приема(передачи) данных из таблицы postgresql в формате JSON.
  */
 public class Controller extends HttpServlet {
-    private ServiceDB serviceDB = new ServiceDB();
+    private final ServiceDB serviceDB = ServiceDB.getINSTANCE();
 
     /**
      * Передаем записи их таблицы в зависимости от параметра show. All все, иначе только у которых поле done = TRUE.
@@ -34,6 +34,7 @@ public class Controller extends HttpServlet {
 
     /**
      * Метод для приема данных в формате JSON, преобразовании его к типу QuerryBD и записи в БД.
+     * По хорошему здесь надо было создать функицю для сортировки типов запросов, если поменяется функционал запросов.
      *
      * @param req  запрос.
      * @param resp ответ.
