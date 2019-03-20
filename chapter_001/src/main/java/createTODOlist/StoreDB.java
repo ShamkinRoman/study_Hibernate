@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Класс для выполнения запросов записи и получения списка объектов в БД.
@@ -23,8 +22,6 @@ public class StoreDB implements AutoCloseable {
     }
 
     private List<Task> tasks;
-    private List<Task> temp;
-
 
     @Override
     public void close() throws Exception {
@@ -34,11 +31,10 @@ public class StoreDB implements AutoCloseable {
     protected List<Task> getListTask(String string) {
         Session session = factory.openSession();
         session.beginTransaction();
-        temp = session.createQuery("from Task").list();
-        if (!string.equals("all")) {
-            tasks = temp.stream().filter(x -> x.getDone()).collect(Collectors.toList());
-        } else
-            tasks = temp;
+        if (!string.equals("all"))
+            tasks = session.createQuery("from Task where done=true").list();
+        else
+            tasks = session.createQuery("from Task").list();
         session.getTransaction().commit();
         session.close();
         return tasks;
