@@ -1,0 +1,8 @@
+<hibernate-mapping>
+    <class name = "mapping.Kpp" table="kpp">
+        <id name="id" column="id">
+            <generator class = "identity"/>
+        </id>
+        <property name = "nameKpp" column="namekpp"/>
+    </class>
+</hibernate-mapping>
