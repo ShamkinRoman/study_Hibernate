@@ -16,9 +16,15 @@
         <mapping resource="mappingXML/Kpp.hbm.xml"/>
         <mapping resource="mappingXML/Car.hbm.xml"/>
 
+        <mapping class="mappingAnnotation.BodyAnnatation"/>
+        <mapping class="mappingAnnotation.EngineAnnatation"/>
+        <mapping class="mappingAnnotation.KppAnnatation"/>
+        <mapping class="mappingAnnotation.CarAnnatation"/>
+
+
+
         <!--<property name="show_sql">true</property>-->
         <!--<property name="connection.pool_size">1</property>-->
         <!--<property name="current_session_context_class">thread</property>-->
-
     </session-factory>
 </hibernate-configuration>

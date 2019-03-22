@@ -1,0 +1,71 @@
+package mappingAnnotation;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.junit.Test;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+public class CarAnnatationTest {
+    @Test
+    public void createCar() {
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        CarAnnatation car = new CarAnnatation();
+        session.beginTransaction();
+        assertThat(session.createQuery("from CarAnnatation where nameCar='TestCar'").list().size(), is(0));
+        car.setKpp_id(new KppAnnatation(1));
+        car.setEngine_id(new EngineAnnatation(1));
+        car.setBody_id(new BodyAnnatation(1));
+        car.setNameCar("TestCar");
+        session.saveOrUpdate(car);
+        assertThat(session.createQuery("from CarAnnatation where nameCar='TestCar'").list().size(), is(1));
+        session.getTransaction().rollback();
+        session.close();
+        factory.close();
+    }
+
+    @Test
+    public void updateCar() {
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        CarAnnatation car = new CarAnnatation();
+        session.beginTransaction();
+        assertThat(session.createQuery("from CarAnnatation where nameCar='TestCar'").list().size(), is(0));
+        car.setKpp_id(new KppAnnatation(1));
+        car.setEngine_id(new EngineAnnatation(1));
+        car.setBody_id(new BodyAnnatation(1));
+        car.setNameCar("TestCar");
+        session.saveOrUpdate(car);
+        assertThat(session.createQuery("from CarAnnatation where nameCar='TestCar'").list().size(), is(1));
+        Integer cars = session.createQuery("from CarAnnatation ").list().size(); //Узнаем сколько записей в БД.
+        car.setNameCar("NewTestNameCar");
+        session.update(car);
+        assertThat(session.createQuery("from CarAnnatation where nameCar='NewTestNameCar'").list().size(), is(1));
+        assertThat(session.createQuery("from CarAnnatation ").list().size(), is(cars)); //проверяем что количество записей не изменилось.
+        session.getTransaction().rollback();
+        session.close();
+        factory.close();
+    }
+
+    @Test
+    public void deleteCar() {
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        CarAnnatation car = new CarAnnatation();
+        session.beginTransaction();
+        assertThat(session.createQuery("from CarAnnatation where nameCar='TestCar'").list().size(), is(0));
+        car.setKpp_id(new KppAnnatation(1));
+        car.setEngine_id(new EngineAnnatation(1));
+        car.setBody_id(new BodyAnnatation(1));
+        car.setNameCar("TestCar");
+        session.saveOrUpdate(car);
+        assertThat(session.createQuery("from CarAnnatation where nameCar='TestCar'").list().size(), is(1));
+        session.delete(car);
+        assertThat(session.createQuery("from CarAnnatation where nameCar='TestCar'").list().size(), is(0));
+        session.getTransaction().rollback();
+        session.close();
+        factory.close();
+    }
+
+}
