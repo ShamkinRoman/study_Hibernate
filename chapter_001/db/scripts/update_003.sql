@@ -1,0 +1,1 @@
+create table if not exists second (id serial primary key, description character varying (2000), created timestamptz, done boolean);

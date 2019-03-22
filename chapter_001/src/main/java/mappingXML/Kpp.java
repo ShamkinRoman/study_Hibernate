@@ -1,4 +1,4 @@
-package mapping;
+package mappingXML;
 
 public class Kpp {
     private Integer id;

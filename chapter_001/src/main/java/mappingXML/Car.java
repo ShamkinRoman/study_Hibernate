@@ -1,11 +1,11 @@
-package mapping;
+package mappingXML;
 
 public class Car {
     private Integer id;
     private String nameCar;
     private Body body_id;
     private Engine engine_id;
-    private  Kpp kpp_id;
+    private Kpp kpp_id;
 
     public Car() {
     }

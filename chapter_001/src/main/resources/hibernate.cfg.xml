@@ -11,10 +11,10 @@
         <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
         <mapping resource="createTODOlist/Task.hbm.xml"/>
 
-        <mapping resource="mapping/Body.hbm.xml"/>
-        <mapping resource="mapping/Engine.hbm.xml"/>
-        <mapping resource="mapping/Kpp.hbm.xml"/>
-        <mapping resource="mapping/Car.hbm.xml"/>
+        <mapping resource="mappingXML/Body.hbm.xml"/>
+        <mapping resource="mappingXML/Engine.hbm.xml"/>
+        <mapping resource="mappingXML/Kpp.hbm.xml"/>
+        <mapping resource="mappingXML/Car.hbm.xml"/>
 
         <!--<property name="show_sql">true</property>-->
         <!--<property name="connection.pool_size">1</property>-->

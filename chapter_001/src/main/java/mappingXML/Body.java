@@ -1,8 +1,8 @@
-package mapping;
+package mappingXML;
 
 public class Body {
-    private  Integer id;
-    private  String nameBody;
+    private Integer id;
+    private String nameBody;
 
     public Body() {
     }
