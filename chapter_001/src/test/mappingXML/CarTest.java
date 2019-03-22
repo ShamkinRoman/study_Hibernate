@@ -3,6 +3,7 @@ package mappingXML;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -10,10 +11,10 @@ import static org.junit.Assert.assertThat;
 
 import java.sql.SQLException;
 
-public class BodyTest {
+public class CarTest {
 
     @Test
-    public void createCar() throws SQLException {
+    public void createCar() {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Car car = new Car();
@@ -31,7 +32,7 @@ public class BodyTest {
     }
 
     @Test
-    public void updateCar() throws SQLException {
+    public void updateCar() {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Car car = new Car();
@@ -54,7 +55,7 @@ public class BodyTest {
     }
 
     @Test
-    public void deleteCar() throws SQLException {
+    public void deleteCar() {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Car car = new Car();
@@ -72,5 +73,4 @@ public class BodyTest {
         session.close();
         factory.close();
     }
-
 }
