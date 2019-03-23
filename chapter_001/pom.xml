@@ -59,7 +59,7 @@
                     <url>jdbc:postgresql://127.0.0.1:5432/item</url>
                     <driver>org.postgresql.Driver</driver>
                     <username>postgres</username>
-                    <password>Uht,tymrjdf42</password>
+                    <password></password>
 
 
                 </configuration>

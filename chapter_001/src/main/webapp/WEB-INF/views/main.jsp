@@ -45,7 +45,8 @@
 </div>
 
 <div id="addCars">
-    <img src="/helloImage"  class="rounded-circle" alt="Cinque Terre" width="304" height="236">
+    <img src="${pageContext.request.contextPath}/001.jpg"  class="rounded-circle" alt="Cinque Terre" width="304" height="236">
+    <p> "${pageContext.request.contextPath}/001.jpg"</p>
 </div>
 
 </body>

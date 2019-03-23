@@ -15,7 +15,23 @@
         <servlet-name>HelloImage</servlet-name>
         <servlet-class>saleCars.HelloImage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SignIn</servlet-name>
+        <servlet-class>saleCars.SigninControllerCars</servlet-class>
+    </servlet>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>saleCars.AuthFilterCars</filter-class>
+    </filter>
 
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>SignIn</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HelloImage</servlet-name>
         <url-pattern>/helloImage</url-pattern>

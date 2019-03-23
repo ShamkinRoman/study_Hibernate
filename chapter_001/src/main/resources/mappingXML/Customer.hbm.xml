@@ -1,0 +1,9 @@
+<hibernate-mapping>
+    <class name = "mappingXML.Customer" table="customer">
+        <id name="id" column="id">
+            <generator class = "identity"/>
+        </id>
+        <property name = "nameCustomer" column="nameCustomer"/>
+        <property name = "passwordCustomer" column="passwordCustomer"/>
+    </class>
+</hibernate-mapping>

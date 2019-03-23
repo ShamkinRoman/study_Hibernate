@@ -15,6 +15,9 @@
         <mapping resource="mappingXML/Engine.hbm.xml"/>
         <mapping resource="mappingXML/Kpp.hbm.xml"/>
         <mapping resource="mappingXML/Car.hbm.xml"/>
+        <mapping resource="mappingXML/FinishCar.hbm.xml"/>
+        <mapping resource="mappingXML/Customer.hbm.xml"/>
+
 
         <mapping class="mappingAnnotation.BodyAnnatation"/>
         <mapping class="mappingAnnotation.EngineAnnatation"/>
