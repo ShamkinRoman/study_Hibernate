@@ -7,7 +7,23 @@
         <servlet-name>Controller</servlet-name>
         <servlet-class>createTODOlist.Controller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StartController</servlet-name>
+        <servlet-class>saleCars.StartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HelloImage</servlet-name>
+        <servlet-class>saleCars.HelloImage</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>HelloImage</servlet-name>
+        <url-pattern>/helloImage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StartController</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/base</url-pattern>

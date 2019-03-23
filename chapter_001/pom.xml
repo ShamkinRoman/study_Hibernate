@@ -29,6 +29,18 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/taglibs/standard -->
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -47,7 +59,7 @@
                     <url>jdbc:postgresql://127.0.0.1:5432/item</url>
                     <driver>org.postgresql.Driver</driver>
                     <username>postgres</username>
-                    <password></password>
+                    <password>Uht,tymrjdf42</password>
 
 
                 </configuration>
