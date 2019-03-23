@@ -2,6 +2,7 @@ package mappingXML;
 
 public class FinishCar {
     private Integer id;
+    private Boolean done;
     private Customer user_id;
     private Car car_id;
 
@@ -10,6 +11,14 @@ public class FinishCar {
 
     public FinishCar(Integer id) {
         this.id = id;
+    }
+
+    public Boolean getDone() {
+        return done;
+    }
+
+    public void setDone(Boolean done) {
+        this.done = done;
     }
 
     public Integer getId() {
@@ -40,6 +49,7 @@ public class FinishCar {
     public String toString() {
         return "FinishCar{" +
                 "id=" + id +
+                ", done=" + done +
                 ", user_id=" + user_id +
                 ", car_id=" + car_id +
                 '}';

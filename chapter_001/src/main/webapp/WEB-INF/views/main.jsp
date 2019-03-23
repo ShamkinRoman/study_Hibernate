@@ -21,28 +21,12 @@
 
 </head>
 <body>
-<div class="container">
+<div>
     <h2>Вы на главной странице.</h2>
-    <p>Войдите или зарегистрируйтесь.</p>
-    <form action="/action_page.php">
-        <div class="form-group">
-            <label for="usr">Name:</label>
-            <input type="text"  id="usr" name="username">
-<br>
-            <label for="pwd">Password:</label>
-            <input type="password"  id="pwd" name="password">
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="customRadio" name="example" value="customEx" checked="checked">
-            <label class="custom-control-label" for="customRadio">Войти</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="customRadio2" name="example" value="customEx">
-            <label class="custom-control-label" for="customRadio2">Зарегестрироваться</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
-    </form>
 </div>
+<button type="button" class="btn btn-primary" onclick="location.href='./add'">Подать заявку на продажу </button>
+<br>
+Ddf
 
 <div id="addCars">
     <img src="${pageContext.request.contextPath}/001.jpg"  class="rounded-circle" alt="Cinque Terre" width="304" height="236">
