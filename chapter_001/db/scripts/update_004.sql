@@ -48,3 +48,17 @@ create table finishcar
 );
 
 insert into finishcar(done, user_id, car_id) VALUES (true, 1, 57);
+
+
+--create table item
+create table item(
+                  id serial primary key,
+                  nameCar varchar(200),
+                  body varchar(200),
+                  engine varchar(200),
+                  transmission varchar(200),
+                  done boolean,
+                  customer_id integer references customer(id)
+                 );
+
+insert into item(nameCar, body, engine, transmission, done, customer_id) VALUES ('Toto', 'Хэчбек', 'механика', 'автомат', false, 1 );

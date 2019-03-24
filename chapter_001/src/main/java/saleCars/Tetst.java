@@ -10,6 +10,7 @@ public class Tetst {
         Session session = factory.openSession();
         session.beginTransaction();
         session.createQuery("from FinishCar ").list().forEach(System.out::println);
+        session.createQuery("from Item ").list().forEach(System.out::println);
         session.close();
         factory.close();
     }

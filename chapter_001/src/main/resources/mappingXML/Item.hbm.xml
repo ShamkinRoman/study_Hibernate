@@ -1,0 +1,15 @@
+<hibernate-mapping>
+    <class name="mappingXML.Item" table="">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="nameCar" column="nameCar"/>
+        <property name="body" column="body"/>
+        <property name="engine" column="engine"/>
+        <property name="transmission" column="transmission"/>
+        <property name="done" column="done"/>
+
+        <many-to-one name="customer_id" column="customer_id"
+                     class="mappingXML.Customer"/>
+    </class>
+</hibernate-mapping>
