@@ -5,7 +5,6 @@ public class FinishCar {
     private Boolean done;
     private Customer user_id;
     private Car car_id;
-
     public FinishCar() {
     }
 

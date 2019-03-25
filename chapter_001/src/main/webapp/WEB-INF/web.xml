@@ -53,4 +53,15 @@
         <servlet-name>Controller</servlet-name>
         <url-pattern>/base</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>saleCars.FileUploadServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
 </web-app>

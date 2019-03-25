@@ -1,11 +1,14 @@
 package saleCars;
 
 import createTODOlist.Task;
+import mappingXML.Customer;
 import mappingXML.Item;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class StorageItem implements AutoCloseable {
     private final SessionFactory factory = SessionFactorySingleton.getSessionFactory();
@@ -39,14 +42,33 @@ public class StorageItem implements AutoCloseable {
     /**
      * Добавляем или обновляем запись в БД.
      *
-     * @param tempItem Запись для внисения в БД.
+     * @param itemCreate Запись для внисения в БД.
      */
-    protected void addTask(Item tempItem) {
+    protected void addTask(ItemCreate itemCreate) {
         Session session = factory.openSession();
-
+        Item item = new Item();
         session.beginTransaction();
-        session.saveOrUpdate(tempItem);
+        item.setBody(itemCreate.getBody());
+        item.setDone(itemCreate.getDone());
+        item.setEngine(itemCreate.getEngine());
+        item.setTransmission(itemCreate.getTransmission());
+        item.setNameCar(itemCreate.getNameCar());
+        item.setCustomer_id(itemCreate.getCustomer_id());
+        session.saveOrUpdate(item);
         session.getTransaction().commit();
         session.close();
     }
+
+    protected Customer findCustomerById(Integer id) {
+        Session session = factory.openSession();
+        Customer customer;
+        session.beginTransaction();
+        customer = (Customer) session.createQuery("from Customer where id=" + id.toString()).list().get(0);
+        session.getTransaction().commit();
+        session.close();
+        return customer;
+    }
+
+
+
 }

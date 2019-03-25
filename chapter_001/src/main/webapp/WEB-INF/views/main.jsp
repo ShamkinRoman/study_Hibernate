@@ -22,7 +22,7 @@
 </head>
 <body>
 <div>
-    <h2>Вы на главной странице.</h2>
+    <h2><c:out value="${sessionScope.get('user')}"></c:out> Вы на главной странице.</h2>
 </div>
 <button type="button" class="btn btn-primary" onclick="location.href='./add'">Подать заявку на продажу </button>
 <br>
