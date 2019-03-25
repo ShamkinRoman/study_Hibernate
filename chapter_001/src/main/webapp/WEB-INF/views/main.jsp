@@ -9,6 +9,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>--%>
 <html>
 <head>
     <title>Магазин машин.</title>
@@ -32,6 +33,9 @@ Ddf
     <img src="${pageContext.request.contextPath}/001.jpg"  class="rounded-circle" alt="Cinque Terre" width="304" height="236">
     <p> "${pageContext.request.contextPath}/001.jpg"</p>
 </div>
+<img src="img/001.JPG">
+<%--<img alt="logo" src="<html:rewrite page='/resources/001.jpg'/>" width="100%" height="20%"/>--%>
+<img alt="logo" src="./hello" />
 
 </body>
 </html>

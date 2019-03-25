@@ -19,5 +19,8 @@ public class Tetst {
         Date date = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyyMMddhhmmss");
         System.out.println(formatForDateNow.format(date));
+        String path = "E:\\java\\study_Hibernate\\chapter_001\\target\\chapter_001-2.0\\upload\\001.JPG";
+        System.out.println(path);
+
     }
 }

@@ -115,7 +115,7 @@
             <td>
                 <input type="text" id="carName">
                 <c:if test="${requestScope.get('resultLoadFile').equals('success')!=true}">
-                    <form method="POST" enctype="multipart/form-data" action="upload">
+                    <form method="POST" enctype="multipart/form-data" action="upload"><br>
                         File to upload: <input type="file" name="upfile"><br/>
                         <br/>
                         <input type="submit" value="Press"> to upload the file!

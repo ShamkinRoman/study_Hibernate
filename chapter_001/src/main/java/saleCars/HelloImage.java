@@ -2,6 +2,7 @@ package saleCars;
 
 import java.awt.image.BufferedImage;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.io.OutputStream;
@@ -19,9 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
 /**
- *
  * @author ASaburov
  */
 
@@ -39,7 +38,7 @@ public class HelloImage extends HttpServlet {
         OutputStream out = response.getOutputStream();
         try {
             // Тут можн загрузить файл с диска не через URL а напрямую - сами найдете
-            URL imageURL = HelloImage.class.getResource("001.jpg");
+            URL imageURL = HelloImage.class.getResource("E:\\java\\study_Hibernate\\chapter_001\\target\\chapter_001-2.0\\upload\\001.JPG");
             BufferedImage bi = ImageIO.read(imageURL);
             ImageIO.setUseCache(false);
             ImageIO.write(bi, "jpg", out);
@@ -51,7 +50,19 @@ public class HelloImage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+
+//        byte[] content = resultSet.getBytes("content");
+//        response.setContentType(getServletContext().getMimeType(imageName));
+//        response.setContentLength(content.length);
+//        response.getOutputStream().write(content);
+
+        response.setContentType("image/JPG");
+        OutputStream out = response.getOutputStream();
+        BufferedImage bi = ImageIO.read(new File("E:\\java\\study_Hibernate\\chapter_001\\target\\chapter_001-2.0\\upload\\001.JPG"));
+        ImageIO.setUseCache(false);
+        ImageIO.write(bi, "jpg", out);
+        out.close();
     }
 
 

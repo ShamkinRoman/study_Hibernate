@@ -1,8 +1,7 @@
 package saleCars;
 
 import createTODOlist.Task;
-import mappingXML.Customer;
-import mappingXML.Item;
+import mappingXML.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -42,19 +41,32 @@ public class StorageItem implements AutoCloseable {
     /**
      * Добавляем или обновляем запись в БД.
      *
-     * @param itemCreate Запись для внисения в БД.
+     * @param kostyl Запись для внисения в БД.
      */
-    protected void addTask(ItemCreate itemCreate) {
+    protected Car addCar(Kostyl kostyl) {
         Session session = factory.openSession();
-        Item item = new Item();
+        Car car = new Car();
         session.beginTransaction();
-        item.setBody(itemCreate.getBody());
-        item.setDone(itemCreate.getDone());
-        item.setEngine(itemCreate.getEngine());
-        item.setTransmission(itemCreate.getTransmission());
-        item.setNameCar(itemCreate.getNameCar());
-        item.setCustomer_id(itemCreate.getCustomer_id());
-        session.saveOrUpdate(item);
+        car.setNameCar(kostyl.getCarName());
+        car.setBody_id(new Body(kostyl.getBodyCar()));
+        car.setEngine_id(new Engine(kostyl.getEngine()));
+        car.setKpp_id(new Kpp(kostyl.getTransmission()));
+        session.saveOrUpdate(car);
+        session.getTransaction().commit();
+        session.close();
+        return car;
+    }
+
+    protected void addFinishCar(Kostyl kostyl) {
+        Car car = addCar(kostyl);
+        Session session = factory.openSession();
+        FinishCar finishCar = new FinishCar();
+        session.beginTransaction();
+        finishCar.setDone(false); //доработать
+        finishCar.setLinkToFile(kostyl.getLinkToFile());
+        finishCar.setCar_id(car);
+        finishCar.setUser_id(new Customer(kostyl.getUser()));
+        session.saveOrUpdate(finishCar);
         session.getTransaction().commit();
         session.close();
     }
@@ -68,7 +80,4 @@ public class StorageItem implements AutoCloseable {
         session.close();
         return customer;
     }
-
-
-
 }

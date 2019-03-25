@@ -43,7 +43,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HelloImage</servlet-name>
-        <url-pattern>/helloImage</url-pattern>
+        <url-pattern>/hello</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StartController</servlet-name>
