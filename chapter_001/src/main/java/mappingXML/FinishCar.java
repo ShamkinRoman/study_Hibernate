@@ -5,7 +5,17 @@ public class FinishCar {
     private Boolean done;
     private Customer user_id;
     private Car car_id;
+    private String linkToFile;
+
     public FinishCar() {
+    }
+
+    public String getLinkToFile() {
+        return linkToFile;
+    }
+
+    public void setLinkToFile(String linkToFile) {
+        this.linkToFile = linkToFile;
     }
 
     public FinishCar(Integer id) {
@@ -51,6 +61,7 @@ public class FinishCar {
                 ", done=" + done +
                 ", user_id=" + user_id +
                 ", car_id=" + car_id +
+                ", linkToFile='" + linkToFile + '\'' +
                 '}';
     }
 }

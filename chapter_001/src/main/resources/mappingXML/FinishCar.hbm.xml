@@ -9,5 +9,6 @@
 
         <many-to-one name="car_id" column="car_id"
                      class="mappingXML.Car"/>
+        <property name="linkToFile" column="linkToFile"/>
     </class>
 </hibernate-mapping>

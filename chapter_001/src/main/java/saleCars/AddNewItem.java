@@ -36,6 +36,10 @@ public class AddNewItem extends HttpServlet {
         Gson gson = new Gson();
         Kostyl kostyl = gson.fromJson(sb.toString(), Kostyl.class);
         System.out.println(kostyl);
+        System.out.println(kostyl.getBodyCar());
+        System.out.println(kostyl.getEngine());
+        System.out.println(kostyl.getTransmission());
+        System.out.println(kostyl.getUser());
     }
 }
 

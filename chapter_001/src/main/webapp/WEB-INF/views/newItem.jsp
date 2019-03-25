@@ -24,7 +24,17 @@
             var bodyCar = isCheck("bodyCar").value;
             var engine = isCheck("engine").value;
             var transmission = isCheck("transmission").value;
-            var resp = {"bodyCar": bodyCar, "engine": engine, "transmission":transmission};
+            var linkToFile = document.getElementById("linkToFile").value;
+            var user = document.getElementById("user").value;
+            var carName = document.getElementById("carName").value;
+            var resp = {
+                "bodyCar": bodyCar,
+                "engine": engine,
+                "transmission": transmission,
+                "user": user,
+                "linkToFile": linkToFile,
+                "carName": carName
+            };
             var xhr = new XMLHttpRequest();
             var respToJson = JSON.stringify(resp);
             xhr.open("POST", "./add", false);
@@ -33,6 +43,11 @@
 
         function isCheck(name) {
             return document.querySelector('input[name="' + name + '"]:checked');
+        }
+
+        function printLabel() {
+            var vv = document.getElementById("carName").value;
+            alert(vv);
         }
     </script>
 </head>
@@ -98,28 +113,28 @@
                 </div>
             </td>
             <td>
+                <input type="text" id="carName">
                 <c:if test="${requestScope.get('resultLoadFile').equals('success')!=true}">
                     <form method="POST" enctype="multipart/form-data" action="upload">
                         File to upload: <input type="file" name="upfile"><br/>
-                        Notes about the file: <input type="text" name="note"><br/>
                         <br/>
                         <input type="submit" value="Press"> to upload the file!
                     </form>
                 </c:if>
                 <c:if test="${(requestScope.get('resultLoadFile').equals('success'))}">
                     Файл успешно загружен <br>
-                    <label id="labelPath"> <c:out value="${requestScope.get('filePath')}"></c:out> </label>
-
+                    <input type="text" value="<c:out value="${requestScope.get('filePath')}"></c:out>" hidden
+                           id="linkToFile">
+                    <input type="text" value="<c:out value="${sessionScope.get('user')}"></c:out>" hidden
+                           id="user">
                 </c:if>
             </td>
         </tr>
         </tbody>
     </table>
-    <button type="button" class="btn btn-info" onclick="location.href='./add'">Отправить</button>
+    <button type="button" class="btn btn-info" onclick="sendBody()">Отправить</button>
 </div>
-
-<input type="button" onclick="sendBody()">
-
+<input type="button" onclick="printLabel()">
 
 </body>
 </html>

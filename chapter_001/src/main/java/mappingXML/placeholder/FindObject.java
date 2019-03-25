@@ -59,12 +59,11 @@ public class FindObject {
         session.beginTransaction();
         try {
             session.saveOrUpdate(customer);
+            session.getTransaction().commit();
             result = true;
         } catch (Exception e) {
-            session.getTransaction().rollback();
-            throw e;
+            e.printStackTrace();
         } finally {
-            session.getTransaction().commit();
             session.close();
         }
         return result;
