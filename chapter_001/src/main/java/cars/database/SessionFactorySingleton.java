@@ -1,4 +1,4 @@
-package cars.logic;
+package cars.database;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
