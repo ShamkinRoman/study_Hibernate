@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
@@ -80,4 +81,16 @@ public class StorageItem implements AutoCloseable {
         session.close();
         return customer;
     }
+
+    protected List<FinishCar> getFinishCars(String string) {
+        List<FinishCar> carsList;
+        Session session = factory.openSession();
+        session.beginTransaction();
+        carsList = (List<FinishCar>) session.createQuery("from FinishCar ").list();
+        session.getTransaction().commit();
+        session.close();
+        return  carsList;
+    }
+
+
 }

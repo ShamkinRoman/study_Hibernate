@@ -10,6 +10,10 @@ public class Car {
     public Car() {
     }
 
+    public Car(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

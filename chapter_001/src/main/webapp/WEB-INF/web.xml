@@ -24,10 +24,10 @@
         <filter-class>saleCars.AuthFilterCars</filter-class>
     </filter>
     <servlet>
-    <servlet-name>AddItem</servlet-name>
-    <servlet-class>saleCars.AddNewItem</servlet-class>
+        <servlet-name>AddItem</servlet-name>
+        <servlet-class>saleCars.AddNewItem</servlet-class>
     </servlet>
-    
+
 
     <servlet-mapping>
         <servlet-name>AddItem</servlet-name>
@@ -64,4 +64,17 @@
         <servlet-name>Upload</servlet-name>
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>GetFinishCar</servlet-name>
+        <servlet-class>saleCars.GetItemFromDBController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GetFinishCar
+        </servlet-name>
+        <url-pattern>/getitems</url-pattern>
+    </servlet-mapping>
 </web-app>
+

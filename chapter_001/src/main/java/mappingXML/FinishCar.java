@@ -7,18 +7,19 @@ public class FinishCar {
     private Car car_id;
     private String linkToFile;
 
-    public FinishCar() {
-    }
-
-    public String getLinkToFile() {
-        return linkToFile;
-    }
-
-    public void setLinkToFile(String linkToFile) {
-        this.linkToFile = linkToFile;
-    }
-
     public FinishCar(Integer id) {
+        this.id = id;
+    }
+
+    public FinishCar() {
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -28,14 +29,6 @@ public class FinishCar {
 
     public void setDone(Boolean done) {
         this.done = done;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Customer getUser_id() {
@@ -52,6 +45,14 @@ public class FinishCar {
 
     public void setCar_id(Car car_id) {
         this.car_id = car_id;
+    }
+
+    public String getLinkToFile() {
+        return linkToFile;
+    }
+
+    public void setLinkToFile(String linkToFile) {
+        this.linkToFile = linkToFile;
     }
 
     @Override

@@ -9,6 +9,9 @@
         <property name="connection.username">postgres</property>
         <property name="connection.password">Uht,tymrjdf42</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+
+
+        
         <mapping resource="createTODOlist/Task.hbm.xml"/>
 
         <mapping resource="mappingXML/Body.hbm.xml"/>
@@ -23,8 +26,6 @@
         <mapping class="mappingAnnotation.EngineAnnatation"/>
         <mapping class="mappingAnnotation.KppAnnatation"/>
         <mapping class="mappingAnnotation.CarAnnatation"/>
-
-
 
         <!--<property name="show_sql">true</property>-->
         <!--<property name="connection.pool_size">1</property>-->

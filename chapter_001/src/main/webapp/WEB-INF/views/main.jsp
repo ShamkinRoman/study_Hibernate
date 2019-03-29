@@ -19,23 +19,50 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+    function printCar() {
+        var xhr = new XMLHttpRequest();
+        // var check = document.getElementById("check_show_all").checked;
+        // var all_task = "no";
+        // if (check) {
+        //     all_task = "all";
+        // }
+        xhr.open("GET", "./getitems", false);
+        xhr.send();
+        var response = xhr.responseText;
+        var tasks = JSON.parse(response);
+        alert (tasks)
 
+    }
+    </script>
 </head>
 <body>
 <div>
     <h2><c:out value="${sessionScope.get('user')}"></c:out> Вы на главной странице.</h2>
 </div>
-<button type="button" class="btn btn-primary" onclick="location.href='./add'">Подать заявку на продажу </button>
+<button type="button" class="btn btn-primary" onclick="location.href='./add'">Подать заявку на продажу</button>
 <br>
-Ddf
+<br>
+Список объявлений!
+<table>
+    <thead>
+    <tr>
+        <th>№ объявления</th>
+        <th>Картинка</th>
+        <th>Характеристики</th>
+        <th>продана/не продана</th>
+    </tr>
+    </thead>
+    <thead id="finishCar">
 
-<div id="addCars">
-    <img src="${pageContext.request.contextPath}/001.jpg"  class="rounded-circle" alt="Cinque Terre" width="304" height="236">
-    <p> "${pageContext.request.contextPath}/001.jpg"</p>
-</div>
-<img src="img/001.JPG">
-<%--<img alt="logo" src="<html:rewrite page='/resources/001.jpg'/>" width="100%" height="20%"/>--%>
-<img alt="logo" src="./hello" />
+    </thead>
+</table>
 
+
+<img alt="logo" src="./hello"/>
+
+<br>
+<br>
+<input type="button" onclick="printCar()" value="Wagh">
 </body>
 </html>

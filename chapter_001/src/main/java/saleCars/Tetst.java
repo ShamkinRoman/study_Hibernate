@@ -1,26 +1,26 @@
 package saleCars;
 
+import com.google.gson.Gson;
+import mappingXML.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 public class Tetst {
     public static void main(String[] args) {
-//        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-//        Session session = factory.openSession();
-//        session.beginTransaction();
-//        session.createQuery("from FinishCar ").list().forEach(System.out::println);
-//        session.createQuery("from Item ").list().forEach(System.out::println);
-//        session.close();
-//        factory.close();
-        Date date = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyyMMddhhmmss");
-        System.out.println(formatForDateNow.format(date));
-        String path = "E:\\java\\study_Hibernate\\chapter_001\\target\\chapter_001-2.0\\upload\\001.JPG";
-        System.out.println(path);
+
+        SessionFactory factory = SessionFactorySingleton.getSessionFactory();
+        List<Car> cars;
+        Session session = factory.openSession();
+        session.beginTransaction();
+        cars = session.createQuery("from Car ").list();
+//        cars.forEach(System.out::println);
+//        System.out.println(new Gson().toJson(cars));
+        session.getTransaction().commit();
+        session.close();
+        cars.forEach(System.out::println);
+//        System.out.println(new Gson().toJson(cars));
+        factory.close();
 
     }
 }

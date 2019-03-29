@@ -3,8 +3,10 @@ package saleCars;
 import com.google.gson.Gson;
 import mappingXML.Car;
 import mappingXML.Customer;
+import mappingXML.FinishCar;
 import mappingXML.Item;
 
+import java.util.Collection;
 import java.util.List;
 
 public class ServiceItem implements AutoCloseable {
@@ -53,4 +55,9 @@ public class ServiceItem implements AutoCloseable {
     protected void addFinishCar(Kostyl kostyl) {
         storage.addFinishCar(kostyl);
     }
+
+    protected List<FinishCar> getFinishCars(){
+        return storage.getFinishCars("From FinishCar");
+    }
+
 }

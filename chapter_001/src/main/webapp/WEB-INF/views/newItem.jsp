@@ -55,6 +55,11 @@
 
 <div class="container">
     <h2>Заполните заявку <c:out value="${sessionScope.get('user')}"></c:out></h2>
+
+    <c:if test="${requestScope.get('resultLoadFile').equals('success')!=true}">
+        Вначале загрузите файл.
+    </c:if>
+
     <table class="table table-borderless">
         <thead>
         <tr>
@@ -118,7 +123,7 @@
                     <form method="POST" enctype="multipart/form-data" action="upload"><br>
                         File to upload: <input type="file" name="upfile"><br/>
                         <br/>
-                        <input type="submit" value="Press"> to upload the file!
+                        <input type="submit" value="Press"> Загрузить файл!
                     </form>
                 </c:if>
                 <c:if test="${(requestScope.get('resultLoadFile').equals('success'))}">

@@ -50,12 +50,6 @@ public class HelloImage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        processRequest(request, response);
-
-//        byte[] content = resultSet.getBytes("content");
-//        response.setContentType(getServletContext().getMimeType(imageName));
-//        response.setContentLength(content.length);
-//        response.getOutputStream().write(content);
 
         response.setContentType("image/JPG");
         OutputStream out = response.getOutputStream();

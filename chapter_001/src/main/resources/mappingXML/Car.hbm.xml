@@ -4,8 +4,6 @@
             <generator class="identity"/>
         </id>
         <property name="nameCar" column="nameCar"/>
-
-
         <many-to-one name="body_id" column="body_id"
                      class="mappingXML.Body"/>
 
