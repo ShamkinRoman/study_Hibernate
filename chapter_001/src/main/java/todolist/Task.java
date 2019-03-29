@@ -1,4 +1,4 @@
-package createTODOlist;
+package todolist;
 
 import java.sql.Timestamp;
 
