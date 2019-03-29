@@ -12,6 +12,14 @@
 
 
         <mapping resource="todolist/Task.hbm.xml"/>
+
+        <mapping class="cars.model.BodyAnnatation"/>
+        <mapping class="cars.model.EngineAnnatation"/>
+        <mapping class="cars.model.KppAnnatation"/>
+        <mapping class="cars.model.CarAnnatation"/>
+        <mapping class="cars.model.CustomerAnnatation"/>
+        <mapping class="cars.model.FinishCarAnnatation"/>
+
         <!--<property name="connection.pool_size">1</property>-->
         <!--<property name="current_session_context_class">thread</property>-->
         <!--<property name="show_sql">true</property>-->
