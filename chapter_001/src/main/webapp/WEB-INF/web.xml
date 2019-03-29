@@ -5,7 +5,7 @@
          version="3.1">
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>createTODOlist.Controller</servlet-class>
+        <servlet-class>todolist.Controller</servlet-class>
     </servlet>
 
     <servlet-mapping>
